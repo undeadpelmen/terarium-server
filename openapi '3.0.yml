@@ -1,0 +1,910 @@
+openapi: 3.0.0
+info:
+  title: Terarium API
+  description: API для управления террариумами, животными и пользователями
+  version: 1.0.0
+  contact:
+    name: API Support
+    email: support@terarium.com
+
+servers:
+  - url: https://api.terarium.com/v1
+    description: Production server
+  - url: https://sandbox.terarium.com/v1
+    description: Sandbox server
+
+paths:
+  /user:
+    get:
+      summary: Get all users
+      tags:
+        - Users
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: List of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetUser'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    post:
+      summary: Create a new user
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUser'
+      responses:
+        '201':
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUser'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /user/{id}:
+    get:
+      summary: Get user by ID
+      tags:
+        - Users
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the user to retrieve
+          schema:
+            type: integer
+            example: 666
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: User details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUser'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    put:
+      summary: Update user
+      tags:
+        - Users
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the user to update
+          schema:
+            type: integer
+            example: 666
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUser'
+      responses:
+        '200':
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUser'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    delete:
+      summary: Delete user
+      tags:
+        - Users
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the user to delete
+          schema:
+            type: integer
+            example: 666
+      security:
+        - BearerAuth: []
+      responses:
+        '204':
+          description: User deleted successfully
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /animal:
+    get:
+      summary: Get all animals
+      tags:
+        - Animals
+      responses:
+        '200':
+          description: List of animals
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetAnimal'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    post:
+      summary: Create a new animal
+      tags:
+        - Animals
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAnimal'
+      responses:
+        '201':
+          description: Animal created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAnimal'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /animal/{id}:
+    get:
+      summary: Get animal by ID
+      tags:
+        - Animals
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the animal to retrieve
+          schema:
+            type: integer
+            example: 666
+      responses:
+        '200':
+          description: Animal details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAnimal'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    put:
+      summary: Update animal
+      tags:
+        - Animals
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the animal to update
+          schema:
+            type: integer
+            example: 666
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAnimal'
+      responses:
+        '200':
+          description: Animal updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAnimal'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    delete:
+      summary: Delete animal
+      tags:
+        - Animals
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the animal to delete
+          schema:
+            type: integer
+            example: 666
+      security:
+        - BearerAuth: []
+      responses:
+        '204':
+          description: Animal deleted successfully
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /terarium:
+    get:
+      summary: Get all terrariums
+      tags:
+        - Terrariums
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: List of terrariums
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetTerarium'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    post:
+      summary: Create a new terrarium
+      tags:
+        - Terrariums
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTerarium'
+      responses:
+        '201':
+          description: Terrarium created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTerarium'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /terarium/{id}:
+    get:
+      summary: Get terrarium by ID
+      tags:
+        - Terrariums
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the terrarium to retrieve
+          schema:
+            type: integer
+            example: 666
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Terrarium details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTerarium'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    put:
+      summary: Update terrarium
+      tags:
+        - Terrariums
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the terrarium to update
+          schema:
+            type: integer
+            example: 666
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTerarium'
+      responses:
+        '200':
+          description: Terrarium updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTerarium'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    delete:
+      summary: Delete terrarium
+      tags:
+        - Terrariums
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the terrarium to delete
+          schema:
+            type: integer
+            example: 666
+      security:
+        - BearerAuth: []
+      responses:
+        '204':
+          description: Terrarium deleted successfully
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /settings:
+    get:
+      summary: Get all settings
+      tags:
+        - Settings
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: List of settings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetSettings'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    post:
+      summary: Create new settings
+      tags:
+        - Settings
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSettings'
+      responses:
+        '201':
+          description: Settings created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSettings'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /settings/{id}:
+    get:
+      summary: Get settings by ID
+      tags:
+        - Settings
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the settings to retrieve
+          schema:
+            type: integer
+            example: 666
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Settings details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSettings'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    put:
+      summary: Update settings
+      tags:
+        - Settings
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the settings to update
+          schema:
+            type: integer
+            example: 666
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSettings'
+      responses:
+        '200':
+          description: Settings updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSettings'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    delete:
+      summary: Delete settings
+      tags:
+        - Settings
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the settings to delete
+          schema:
+            type: integer
+            example: 666
+      security:
+        - BearerAuth: []
+      responses:
+        '204':
+          description: Settings deleted successfully
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /auth/login:
+    post:
+      summary: User login
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          description: Invalid credentials
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+components:
+  schemas:
+    GetAnimal:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 666
+          description: Animal ID
+        name:
+          type: string
+          example: pushok
+          description: Animal name
+        humidity:
+          type: integer
+          example: 87
+          description: Animal requirement of humidity
+        uv_req:
+          type: integer
+          example: 60
+          description: Animal requirement of ultraviolet
+        max_t:
+          type: integer
+          example: 666
+          description: Animal max temperature
+        min_t:
+          type: integer
+          example: 15
+          description: Animal min temperature
+        night_t:
+          type: integer
+          example: 13
+          description: Animal night temperature
+        day_t:
+          type: integer
+          example: 26
+          description: Animal day temperature
+        day_len:
+          type: number
+          example: 0.6
+          description: Animal day length in persents of day
+        feed_rate:
+          type: number
+          example: 1.5
+          description: Animal feed rate in days
+
+    CreateAnimal:
+      type: object
+      required:
+        - name
+        - humidity
+        - uv_req
+        - max_t
+        - min_t
+        - night_t
+        - day_t
+        - day_len
+        - feed_rate
+      properties:
+        name:
+          type: string
+          example: pushok
+        humidity:
+          type: integer
+          example: 87
+        uv_req:
+          type: integer
+          example: 60
+        max_t:
+          type: integer
+          example: 666
+        min_t:
+          type: integer
+          example: 0
+        night_t:
+          type: integer
+          example: 13
+        day_t:
+          type: integer
+          example: 26
+        day_len:
+          type: number
+          example: 0.6
+        feed_rate:
+          type: number
+          example: 1.5
+
+    UpdateAnimal:
+      type: object
+      properties:
+        name:
+          type: string
+          example: pushok
+        humidity:
+          type: integer
+          example: 87
+        uv_req:
+          type: integer
+          example: 60
+        max_t:
+          type: integer
+          example: 666
+        min_t:
+          type: integer
+          example: 15
+        night_t:
+          type: integer
+          example: 13
+        day_t:
+          type: integer
+          example: 26
+        day_len:
+          type: number
+          example: 0.6
+        feed_rate:
+          type: number
+          example: 1.5
+
+    GetTerarium:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 666
+          description: Terrarium ID
+        name:
+          type: string
+          example: My Terrarium
+          description: Terrarium name
+        animal:
+          $ref: '#/components/schemas/GetAnimal'
+          description: Animal that lives in this terrarium
+        created_at:
+          type: string
+          format: date-time
+          example: "2023-05-15T10:00:00Z"
+        updated_at:
+          type: string
+          format: date-time
+          example: "2023-05-15T10:00:00Z"
+
+    CreateTerarium:
+      type: object
+      required:
+        - name
+        - animal_id
+      properties:
+        name:
+          type: string
+          example: My Terrarium
+        animal_id:
+          type: integer
+          example: 666
+
+    UpdateTerarium:
+      type: object
+      properties:
+        name:
+          type: string
+          example: My Terrarium
+        animal_id:
+          type: integer
+          example: 666
+
+    GetSettings:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 666
+        name:
+          type: string
+          example: Default
+        light_theme:
+          type: boolean
+          example: false
+        temperature_unit:
+          type: string
+          enum: [celsius, fahrenheit]
+          example: celsius
+
+    CreateSettings:
+      type: object
+      required:
+        - name
+        - light_theme
+      properties:
+        name:
+          type: string
+          example: Default
+        light_theme:
+          type: boolean
+          example: false
+        temperature_unit:
+          type: string
+          enum: [celsius, fahrenheit]
+          example: celsius
+
+    UpdateSettings:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Default
+        light_theme:
+          type: boolean
+          example: false
+        temperature_unit:
+          type: string
+          enum: [celsius, fahrenheit]
+          example: celsius
+
+    GetUser:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 666
+        phone:
+          type: string
+          example: "+79067668204"
+        terarium:
+          $ref: '#/components/schemas/GetTerarium'
+        settings:
+          $ref: '#/components/schemas/GetSettings'
+        created_at:
+          type: string
+          format: date-time
+          example: "2023-05-15T10:00:00Z"
+
+    CreateUser:
+      type: object
+      required:
+        - phone
+        - password
+      properties:
+        phone:
+          type: string
+          example: "+79067668204"
+        password:
+          type: string
+          format: password
+          example: "strongPassword123"
+        terarium_id:
+          type: integer
+          example: 666
+        settings_id:
+          type: integer
+          example: 666
+
+    UpdateUser:
+      type: object
+      properties:
+        phone:
+          type: string
+          example: "+79067668204"
+        password:
+          type: string
+          format: password
+          example: "newStrongPassword123"
+        terarium_id:
+          type: integer
+          example: 666
+        settings_id:
+          type: integer
+          example: 666
+
+    LoginRequest:
+      type: object
+      required:
+        - phone
+        - password
+      properties:
+        phone:
+          type: string
+          example: "+79067668204"
+        password:
+          type: string
+          format: password
+          example: "strongPassword123"
+
+    LoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        user:
+          $ref: '#/components/schemas/GetUser'
+
+  responses:
+    BadRequestError:
+      description: Bad request - invalid input parameters
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Invalid input parameters"
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    field:
+                      type: string
+                    message:
+                      type: string
+
+    UnauthorizedError:
+      description: Unauthorized - authentication required
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Authentication required"
+
+    NotFoundError:
+      description: Not found - resource doesn't exist
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Resource not found"
+
+    ServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Internal server error"
+
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
