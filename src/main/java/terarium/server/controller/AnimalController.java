@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import terarium.server.dto.Animal.CreateAnimalDto;
 import terarium.server.dto.Animal.UpdateAnimalDto;
 import terarium.server.dto.Error.Error404Dto;
@@ -26,6 +27,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
+@Tag(name = "Animal")
+@Schema(name = "Animal controller", description = "Controller for CRUD requests ")
 public class AnimalController {
     @Autowired
     private AnimalService animalService;
