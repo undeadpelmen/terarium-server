@@ -5,12 +5,14 @@ import lombok.Data;
 @Data
 public class CreateAnimalDto {
     private String name;
-    private int max_t;
-    private int min_t;
-    private int day_t;
-    private int night_t;
+    private String lat_name;
+    private int day_max_t;
+    private int day_min_t;
+    private int night_max_t;
+    private int night_min_t;
     private int uv_req;
-    private int humidity;
+    private int humidity_max;
+    private int humidity_min;
     private float day_len;
     private float feed_rate;
 }
