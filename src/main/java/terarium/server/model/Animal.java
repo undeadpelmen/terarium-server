@@ -1,5 +1,6 @@
 package terarium.server.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,42 +16,55 @@ import terarium.server.dto.Animal.UpdateAnimalDto;
 @Table(name="animal")
 @Data
 @NoArgsConstructor
+@Schema(description = "Animal")
 public class Animal {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Schema(example = "666")
     private int id;
     
     @Column(name = "name",nullable = false,unique = true)
+    @Schema(example = "pushok")
     private String name;
     
     @Column(name = "lat_name",nullable = false,unique = true)
+    @Schema(example = "pushokus obeknovenney")
     private String lat_name;
     
     @Column(name = "day_max_t",nullable = false)
+    @Schema(example = "777")
     private int day_max_t;
     
     @Column(name = "day_min_t",nullable = false)
+    @Schema(example = "666")
     private int day_min_t;
     
     @Column(name = "night_max_t",nullable = false)
+    @Schema(example = "13")
     private int night_max_t;
     
     @Column(name = "night_min_t",nullable = false)
+    @Schema(example = "12")
     private int night_min_t;
     
     @Column(name = "uv_req",nullable = false)
-    private int uv_req;
+    @Schema(example = "0.6")
+    private float uv_req;
     
     @Column(name = "humidity_max",nullable = false)
+    @Schema(example = "90")
     private int humidity_max;
     
     @Column(name = "humidity_min",nullable = false)
+    @Schema(example = "50")
     private int humidity_min;
     
     @Column(name = "day_len",nullable = false)
+    @Schema(example = "0.6")
     private float day_len;
     
     @Column(name = "fed_rate",nullable = false)
+    @Schema(example = "0.5")
     private float feed_rate;
     
     public Animal FromDto(CreateAnimalDto AnimalDto){

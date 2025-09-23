@@ -27,8 +27,14 @@ public class AnimalService {
         return null;
     }
     
-    public Animal CreateAnimal(Animal Animal){
-        return animalRepository.save(Animal);
+    public Animal CreateAnimal(Animal animal){
+        try {
+            return animalRepository.save(animal);
+        } catch (Error e) {
+            System.err.println(e.getMessage());
+            
+            return null;
+        }
     }
     
     public Animal DeleteAnimal(int id){
@@ -40,12 +46,16 @@ public class AnimalService {
     }
     
     public Animal UpdateAnimal(UpdateAnimalDto updateAnimalDto, int id){
-        animalRepository.deleteById(id);
-        
-        Animal animal = new Animal().FromDto(updateAnimalDto);
-        
-        animal.setId(id);
-        
-        return animalRepository.save(animal);
+        try {
+            Animal animal = new Animal().FromDto(updateAnimalDto);
+            
+            animal.setId(id);
+            
+            return animalRepository.save(animal);
+        } catch (Error e) {
+            System.err.println(e.getMessage());
+            
+            return null;
+        }
     }
 }

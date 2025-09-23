@@ -1,12 +1,20 @@
 package terarium.server.controller;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import terarium.server.dto.Animal.CreateAnimalDto;
 import terarium.server.dto.Animal.UpdateAnimalDto;
+import terarium.server.dto.Error.Error404Dto;
 import terarium.server.model.Animal;
 import terarium.server.service.AnimalService;
 
@@ -19,7 +27,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 public class AnimalController {
-    
     @Autowired
     private AnimalService animalService;
     
@@ -29,24 +36,47 @@ public class AnimalController {
     }
     
     @GetMapping("/animal/{animalId}")
-    public Animal getAnimalById(@PathVariable int animalId) {
-        return animalService.GetAnimalById(animalId);
+    @ApiResponses(@ApiResponse(responseCode = "200", useReturnTypeSchema = true, content = @Content(schema = @Schema(implementation = Animal.class))))
+    @ApiResponse(responseCode = "404", description = "Animal not found", content = @Content(schema = @Schema(implementation = Error404Dto.class)))
+    public ResponseEntity<?> getAnimalById(@PathVariable int animalId) {
+        Animal animal = animalService.GetAnimalById(animalId);
+        
+        if (animal != null) {
+            return new ResponseEntity<>(animal,HttpStatus.OK);
+        } else {
+            Error404Dto error = new Error404Dto(404, "ANIMAL NOT FOUND", new Timestamp(System.currentTimeMillis()));
+            
+            return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+        }
     }
     
     @PostMapping("/animal")
-    public Animal createAnimal(@RequestBody CreateAnimalDto createAnimalDto) {
+    @ApiResponses(@ApiResponse(responseCode = "200", useReturnTypeSchema = true, content = @Content(schema = @Schema(implementation = Animal.class))))
+    @ApiResponse(responseCode = "404", description = "Bad request", content = @Content(schema = @Schema(implementation = Error404Dto.class)))
+    public ResponseEntity<?> createAnimal(@RequestBody @Schema(implementation = CreateAnimalDto.class) CreateAnimalDto createAnimalDto) {
         Animal animal = new Animal().FromDto(createAnimalDto);
         
-        return animalService.CreateAnimal(animal);
+        animal = animalService.CreateAnimal(animal);
+        
+        return animal == null ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(animal, HttpStatus.OK);
     }
     
     @DeleteMapping("/animal/{animalId}")
-    public Animal deleAnimal(@PathVariable("animalId") int animalId){
-        return animalService.DeleteAnimal(animalId);
+    @ApiResponses(@ApiResponse(responseCode = "200", useReturnTypeSchema = true, content = @Content(schema = @Schema(implementation = Animal.class))))
+    @ApiResponse(responseCode = "404", description = "Animal not found", content = @Content(schema = @Schema(implementation = Error404Dto.class)))
+    public ResponseEntity<?> deleAnimal(@PathVariable("animalId") int animalId){
+        Animal animal = animalService.DeleteAnimal(animalId);
+        
+        return animal == null ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(animal, HttpStatus.OK);
     }
     
     @PutMapping("animal/{animalId}")
-    public Animal updateAnimal(@PathVariable int animalId, @RequestBody UpdateAnimalDto updateAnimalDto) {
-        return animalService.UpdateAnimal(updateAnimalDto, animalId);
+    @ApiResponses(@ApiResponse(responseCode = "200", useReturnTypeSchema = true, content = @Content(schema = @Schema(implementation = Animal.class))))
+    @ApiResponse(responseCode = "404", description = "Animal not found", content = @Content(schema = @Schema(implementation = Error404Dto.class)))
+    public ResponseEntity<?> updateAnimal(@PathVariable int animalId, @RequestBody @Schema(implementation = UpdateAnimalDto.class) UpdateAnimalDto updateAnimalDto) {
+        Animal animal = animalService.UpdateAnimal(updateAnimalDto, animalId);
+        
+        
+        return animal == null ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(animal, HttpStatus.OK);
     }
 }
