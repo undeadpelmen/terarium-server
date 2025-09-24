@@ -15,7 +15,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import terarium.server.dto.Animal.CreateAnimalDto;
 import terarium.server.dto.Animal.UpdateAnimalDto;
-import terarium.server.dto.Error.Error404Dto;
+import terarium.server.dto.Error.ErrorDto;
 import terarium.server.model.Animal;
 import terarium.server.service.AnimalService;
 
@@ -40,46 +40,67 @@ public class AnimalController {
     
     @GetMapping("/animal/{animalId}")
     @ApiResponses(@ApiResponse(responseCode = "200", useReturnTypeSchema = true, content = @Content(schema = @Schema(implementation = Animal.class))))
-    @ApiResponse(responseCode = "404", description = "Animal not found", content = @Content(schema = @Schema(implementation = Error404Dto.class)))
+    @ApiResponse(responseCode = "404", description = "Animal not found", content = @Content(schema = @Schema(implementation = ErrorDto.class)))
     public ResponseEntity<?> getAnimalById(@PathVariable int animalId) {
         Animal animal = animalService.GetAnimalById(animalId);
         
         if (animal != null) {
             return new ResponseEntity<>(animal,HttpStatus.OK);
         } else {
-            Error404Dto error = new Error404Dto(404, "ANIMAL NOT FOUND", new Timestamp(System.currentTimeMillis()));
+            ErrorDto error = new ErrorDto(404, "ANIMAL NOT FOUND", new Timestamp(System.currentTimeMillis()));
             
-            return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
         }
     }
     
     @PostMapping("/animal")
     @ApiResponses(@ApiResponse(responseCode = "200", useReturnTypeSchema = true, content = @Content(schema = @Schema(implementation = Animal.class))))
-    @ApiResponse(responseCode = "404", description = "Bad request", content = @Content(schema = @Schema(implementation = Error404Dto.class)))
+    @ApiResponse(responseCode = "404", description = "Bad request", content = @Content(schema = @Schema(implementation = ErrorDto.class)))
     public ResponseEntity<?> createAnimal(@RequestBody @Schema(implementation = CreateAnimalDto.class) CreateAnimalDto createAnimalDto) {
         Animal animal = new Animal().FromDto(createAnimalDto);
         
         animal = animalService.CreateAnimal(animal);
         
-        return animal == null ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(animal, HttpStatus.OK);
+        if (animal != null) {
+            return new ResponseEntity<>(animal,HttpStatus.OK);
+        } else {
+            ErrorDto error = new ErrorDto(400, "POSHEL HAXER", new Timestamp(System.currentTimeMillis()));
+            
+            return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+        }
     }
     
     @DeleteMapping("/animal/{animalId}")
     @ApiResponses(@ApiResponse(responseCode = "200", useReturnTypeSchema = true, content = @Content(schema = @Schema(implementation = Animal.class))))
-    @ApiResponse(responseCode = "404", description = "Animal not found", content = @Content(schema = @Schema(implementation = Error404Dto.class)))
+    @ApiResponse(responseCode = "404", description = "Animal not found", content = @Content(schema = @Schema(implementation = ErrorDto.class)))
     public ResponseEntity<?> deleAnimal(@PathVariable("animalId") int animalId){
         Animal animal = animalService.DeleteAnimal(animalId);
         
-        return animal == null ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(animal, HttpStatus.OK);
+        if (animal != null) {
+            return new ResponseEntity<>(animal,HttpStatus.OK);
+        } else {
+            ErrorDto error = new ErrorDto(404, "ANIMAL NOT FOUND", new Timestamp(System.currentTimeMillis()));
+            
+            return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+        }
     }
     
     @PutMapping("animal/{animalId}")
     @ApiResponses(@ApiResponse(responseCode = "200", useReturnTypeSchema = true, content = @Content(schema = @Schema(implementation = Animal.class))))
-    @ApiResponse(responseCode = "404", description = "Animal not found", content = @Content(schema = @Schema(implementation = Error404Dto.class)))
+    @ApiResponse(responseCode = "404", description = "Animal not found", content = @Content(schema = @Schema(implementation = ErrorDto.class)))
     public ResponseEntity<?> updateAnimal(@PathVariable int animalId, @RequestBody @Schema(implementation = UpdateAnimalDto.class) UpdateAnimalDto updateAnimalDto) {
-        Animal animal = animalService.UpdateAnimal(updateAnimalDto, animalId);
+        Animal animal = new Animal().FromDto(updateAnimalDto);
         
+        animal.setId(animalId);
         
-        return animal == null ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(animal, HttpStatus.OK);
+        animal = animalService.UpdateAnimal(animal);
+        
+        if (animal != null) {
+            return new ResponseEntity<>(animal,HttpStatus.OK);
+        } else {
+            ErrorDto error = new ErrorDto(404, "ANIMAL NOT FOUND", new Timestamp(System.currentTimeMillis()));
+            
+            return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+        }
     }
 }

@@ -3,14 +3,16 @@ package terarium.server.dto.Error;
 import java.sql.Timestamp;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-@Schema(description = "404 Error Dto")
-public class Error404Dto {
-    @Schema(example = "404")
+@Tag(name = "Error")
+@Schema(description = "Error Dto")
+public class ErrorDto {
+    @Schema(example = "400")
     private int status;
     
     @Schema(example = "BAD REQUEST")

@@ -1,6 +1,7 @@
 package terarium.server.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,6 +17,7 @@ import terarium.server.dto.Animal.UpdateAnimalDto;
 @Table(name="animal")
 @Data
 @NoArgsConstructor
+@Tag(name = "Animal")
 @Schema(description = "Animal")
 public class Animal {
     @Id
@@ -24,48 +26,64 @@ public class Animal {
     private int id;
     
     @Column(name = "name",nullable = false,unique = true)
-    @Schema(example = "pushok")
+    @Schema(example = "Crested gecko")
     private String name;
     
     @Column(name = "lat_name",nullable = false,unique = true)
-    @Schema(example = "pushokus obeknovenney")
+    @Schema(example = "Correloporhus ciliatus")
     private String lat_name;
     
     @Column(name = "day_max_t",nullable = false)
-    @Schema(example = "777")
+    @Schema(example = "28")
     private int day_max_t;
     
     @Column(name = "day_min_t",nullable = false)
-    @Schema(example = "666")
+    @Schema(example = "26")
     private int day_min_t;
     
     @Column(name = "night_max_t",nullable = false)
-    @Schema(example = "13")
+    @Schema(example = "24")
     private int night_max_t;
     
     @Column(name = "night_min_t",nullable = false)
-    @Schema(example = "12")
+    @Schema(example = "22")
     private int night_min_t;
     
+    @Column(name = "uv_time",nullable = false)
+    @Schema(example = "11.0")
+    private float uv_time;
+    
     @Column(name = "uv_req",nullable = false)
-    @Schema(example = "0.6")
-    private float uv_req;
+    @Schema(example = "5.0,13W")
+    private String uv_req;
     
     @Column(name = "humidity_max",nullable = false)
-    @Schema(example = "90")
+    @Schema(example = "80")
     private int humidity_max;
     
     @Column(name = "humidity_min",nullable = false)
-    @Schema(example = "50")
+    @Schema(example = "60")
     private int humidity_min;
     
     @Column(name = "day_len",nullable = false)
-    @Schema(example = "0.6")
+    @Schema(example = "11.0")
     private float day_len;
     
     @Column(name = "fed_rate",nullable = false)
-    @Schema(example = "0.5")
+    @Schema(example = "2.0")
     private float feed_rate;
+    
+    @Column(name = "kide_fed_rate",nullable = false)
+    @Schema(example = "1.0")
+    private float kide_feed_rate;
+    
+    @Column(name = "food",nullable = false)
+    @Schema(example = "Cricket, zophobas, mealworm, hawk moth caterpillar, sugar-free tropical fruit puree")
+    private String food;
+    
+    @Column(name = "vitamins", nullable = false)
+    @Schema(example = "Calcium, D3, multivitamins")
+    private String vitamins;
     
     public Animal FromDto(CreateAnimalDto AnimalDto){
         Animal animal = new Animal();
@@ -81,6 +99,10 @@ public class Animal {
         animal.setHumidity_min(AnimalDto.getHumidity_min());
         animal.setUv_req(AnimalDto.getUv_req());
         animal.setFeed_rate(AnimalDto.getFeed_rate());
+        animal.setFood(AnimalDto.getFood());
+        animal.setKide_feed_rate(AnimalDto.getKide_feed_rate());
+        animal.setUv_time(AnimalDto.getUv_time());
+        animal.setVitamins(AnimalDto.getVitamins());
         
         return animal;
     }
@@ -99,6 +121,10 @@ public class Animal {
         animal.setHumidity_min(AnimalDto.getHumidity_min());
         animal.setUv_req(AnimalDto.getUv_req());
         animal.setFeed_rate(AnimalDto.getFeed_rate());
+        animal.setFood(AnimalDto.getFood());
+        animal.setKide_feed_rate(AnimalDto.getKide_feed_rate());
+        animal.setUv_time(AnimalDto.getUv_time());
+        animal.setVitamins(AnimalDto.getVitamins());
         
         return animal;
     }
