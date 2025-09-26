@@ -8,36 +8,48 @@ import lombok.Data;
 @Tag(name = "Animal")
 @Schema(name = "Create Animal Dto", description = "Dto for create(POST) request")
 public class CreateAnimalDto {
-    @Schema(example = "pushok")
+    @Schema(example = "Crested gecko")
     private String name;
     
-    @Schema(example = "pushokus obeknovenney")
+    @Schema(example = "Correloporhus ciliatus")
     private String lat_name;
     
-    @Schema(example = "777")
+    @Schema(example = "28")
     private int day_max_t;
     
-    @Schema(example = "666")
+    @Schema(example = "26")
     private int day_min_t;
     
-    @Schema(example = "13")
+    @Schema(example = "24")
     private int night_max_t;
     
-    @Schema(example = "12")
+    @Schema(example = "22")
     private int night_min_t;
     
-    @Schema(example = "0.6")
-    private float uv_req;
+    @Schema(example = "11.0")
+    private float uv_time;
     
-    @Schema(example = "90")
+    @Schema(example = "5.0,13W")
+    private String uv_req;
+    
+    @Schema(example = "80")
     private int humidity_max;
     
-    @Schema(example = "50")
+    @Schema(example = "60")
     private int humidity_min;
     
-    @Schema(example = "0.6")
+    @Schema(example = "11.0")
     private float day_len;
     
-    @Schema(example = "0.5")
+    @Schema(example = "5.5")
     private float feed_rate;
+    
+    @Schema(example = "2.0")
+    private float kide_feed_rate;
+    
+    @Schema(example = "Cricket, zophobas, mealworm, hawk moth caterpillar, sugar-free tropical fruit puree")
+    private String food;
+    
+    @Schema(example = "Calcium, D3, multivitamins")
+    private String vitamins;
 }
