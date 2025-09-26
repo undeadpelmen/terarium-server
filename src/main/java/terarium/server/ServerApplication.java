@@ -8,7 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ServerApplication {
 	
-	static public final Logger log = LoggerFactory.getLogger(ServerApplication.class);
+	public static final Logger log = LoggerFactory.getLogger(ServerApplication.class);
+		
 	public static void main(String[] args) {
 		log.info("Start Spring Boot");
 		SpringApplication.run(ServerApplication.class, args);

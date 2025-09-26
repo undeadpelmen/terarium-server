@@ -73,19 +73,7 @@ public class Animal {
     @Schema(example = "2.0")
     private float feed_rate;
     
-    @Column(name = "kide_fed_rate",nullable = false)
-    @Schema(example = "1.0")
-    private float kide_feed_rate;
-    
-    @Column(name = "food",nullable = false)
-    @Schema(example = "Cricket, zophobas, mealworm, hawk moth caterpillar, sugar-free tropical fruit puree")
-    private String food;
-    
-    @Column(name = "vitamins", nullable = false)
-    @Schema(example = "Calcium, D3, multivitamins")
-    private String vitamins;
-    
-    public Animal FromDto(CreateAnimalDto AnimalDto){
+    public static Animal fromDto(CreateAnimalDto AnimalDto){
         Animal animal = new Animal();
         
         animal.setName(AnimalDto.getName());
@@ -107,7 +95,7 @@ public class Animal {
         return animal;
     }
     
-    public Animal FromDto(UpdateAnimalDto AnimalDto){
+    public static Animal fromDto(UpdateAnimalDto AnimalDto){
         Animal animal = new Animal();
         
         animal.setName(AnimalDto.getName());
