@@ -67,7 +67,7 @@ public class Animal {
     @Schema(example = "0.5")
     private float feed_rate;
     
-    public Animal FromDto(CreateAnimalDto AnimalDto){
+    public static Animal fromDto(CreateAnimalDto AnimalDto){
         Animal animal = new Animal();
         
         animal.setName(AnimalDto.getName());
@@ -85,7 +85,7 @@ public class Animal {
         return animal;
     }
     
-    public Animal FromDto(UpdateAnimalDto AnimalDto){
+    public static Animal fromDto(UpdateAnimalDto AnimalDto){
         Animal animal = new Animal();
         
         animal.setName(AnimalDto.getName());

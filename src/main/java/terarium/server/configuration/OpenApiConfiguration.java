@@ -15,13 +15,14 @@ import java.util.List;
 @AllArgsConstructor
 public class OpenApiConfiguration {
 
-    private Environment environment;
+    private Environment env;
 
     @Bean
     public OpenAPI defineOpenAPI () {
         Server server = new Server();
-        String serverUrl = environment.getProperty("api.server.url");
-        server.setUrl(serverUrl);
+        String serverUrl = env.getProperty("server.address");
+        String serverPort = env.getProperty("server.port");
+        server.setUrl(serverUrl + ":" + serverPort);
         server.setDescription("Development");
 
         Contact myContact = new Contact();

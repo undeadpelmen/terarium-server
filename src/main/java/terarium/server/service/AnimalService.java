@@ -1,5 +1,6 @@
 package terarium.server.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import terarium.server.model.Animal;
-import terarium.server.dto.Animal.UpdateAnimalDto;
 import terarium.server.repository.AnimalRepository;
 
 @Service
@@ -15,47 +15,33 @@ public class AnimalService {
     @Autowired
     private AnimalRepository animalRepository;
     
-    public List<Animal> GetAllAnimals(){
+    public List<Animal> getAllAnimals(){
         return animalRepository.findAll();
     }
     
-    public Animal GetAnimalById(int id){
+    public Animal getAnimalById(int id) throws IOException {
         Optional<Animal> animal = animalRepository.findById(id);
         
-        if (animal.isPresent()) return animal.get();
+        if (!animal.isPresent()) throw new IOException();
         
-        return null;
+        return animal.get();
     }
     
-    public Animal CreateAnimal(Animal animal){
-        try {
-            return animalRepository.save(animal);
-        } catch (Error e) {
-            System.err.println(e.getMessage());
-            
-            return null;
-        }
+    public Animal createAnimal(Animal animal) throws IOException {
+        return animalRepository.save(animal);
     }
     
-    public Animal DeleteAnimal(int id){
+    public void deleteAnimal(int id) throws IOException {
         Optional<Animal> animal = animalRepository.findById(id);
+        
+        if (!animal.isPresent()) throw new IOException();
         
         animalRepository.deleteById(id);
-        
-        return animal.isPresent() ? animal.get() : null;
     }
     
-    public Animal UpdateAnimal(UpdateAnimalDto updateAnimalDto, int id){
-        try {
-            Animal animal = new Animal().FromDto(updateAnimalDto);
-            
-            animal.setId(id);
-            
-            return animalRepository.save(animal);
-        } catch (Error e) {
-            System.err.println(e.getMessage());
-            
-            return null;
-        }
+    public Animal updateAnimal(Animal animal, int id){
+        animal.setId(id);
+        
+        return animalRepository.save(animal);
     }
 }
