@@ -1,5 +1,6 @@
 package terarium.server.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,12 +19,15 @@ import terarium.server.dto.User.UpdateUserDto;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Schema(example = "666")
     private int id;
     
     @Column(name = "email",nullable = false,unique = true)
+    @Schema(example = "example@example.com")
     private String email;
     
     @Column(name = "passwordHash", nullable = false)
+    @Schema(example = "someverystrongpasswordhash")
     private String passwordHash;
     
     public static User fromDto(CreateUserDto createUserDto) {

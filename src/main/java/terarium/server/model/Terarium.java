@@ -1,5 +1,6 @@
 package terarium.server.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,15 +23,19 @@ import terarium.server.dto.Terarium.UpdateTerariumDto;
 public class Terarium {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Schema(example = "666")
     private int id;
     
     @Column(name = "name", nullable = false)
+    @Schema(example = "My Terarium")
     private String name;
     
     @ManyToOne
+    @Schema(contentSchema = Animal.class)
     private Animal animal;
     
     @Column(name = "aftorId")
+    @Schema(example = "666")
     private int aftorId;
     
     public static Terarium fromDto(CreateTerariumDto createTerariumDto, Animal animal) {
