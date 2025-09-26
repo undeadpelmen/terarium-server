@@ -12,7 +12,7 @@ import terarium.server.dto.User.CreateUserDto;
 import terarium.server.dto.User.UpdateUserDto;
 
 @Entity
-@Table(name = "user")
+@Table(name = "terarium_users")
 @Data
 @NoArgsConstructor
 public class User {
@@ -23,14 +23,14 @@ public class User {
     @Column(name = "email",nullable = false,unique = true)
     private String email;
     
-    @Column(name = "password", nullable = false)
-    private String paswordHash;
+    @Column(name = "passwordHash", nullable = false)
+    private String passwordHash;
     
     public static User fromDto(CreateUserDto createUserDto) {
         User user = new User();
         
         user.setEmail(createUserDto.getEmail());
-        user.setPaswordHash(createUserDto.getPassword());
+        user.setPasswordHash(createUserDto.getPasswordHash());
         
         return user;
     }
@@ -39,7 +39,7 @@ public class User {
         User user = new User();
         
         user.setEmail(updateUserDto.getEmail());
-        user.setPaswordHash(updateUserDto.getPassword());
+        user.setPasswordHash(updateUserDto.getPassword());
         
         return user;
     }

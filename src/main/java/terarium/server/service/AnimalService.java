@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +12,6 @@ import terarium.server.repository.AnimalRepository;
 
 @Service
 public class AnimalService {
-    private Logger log = ServerApplication.log;
-    
     @Autowired
     private AnimalRepository animalRepository;
     

@@ -7,5 +7,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CreateUserDto {
     private String email;
-    private String password;
+    private String passwordHash;
 }
