@@ -1,7 +1,9 @@
+FROM gradle:jdk24-alpine AS builder
+WORKDIR /app
+COPY . .
+RUN chmod +x gradlew && ./gradlew build --info
+
 FROM openjdk:25
-
-COPY ./build/libs/server-0.0.1.jar ./app.jar
-
-EXPOSE 8080
-
-CMD [ "java", "-jar", "./app.jar" ]
+WORKDIR /app
+COPY --from=builder /app/build/libs/server-0.0.1.jar app.jar
+CMD ["java", "-jar", "app.jar"]
