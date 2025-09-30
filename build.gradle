@@ -5,14 +5,14 @@ plugins {
 }
 
 group = 'terarium'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
 description = 'Back-end server for terarrium'
 
-java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(21)
-	}
-}
+//java {
+//	toolchain {
+//		languageVersion = JavaLanguageVersion.of(21)
+//	}
+//}
 
 configurations {
 	compileOnly {
