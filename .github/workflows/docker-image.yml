@@ -14,11 +14,11 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: docker build . --tag undeadjava/server:$(date +%s)
+      run: docker build . -t undeadjava/server
     
     - name: Login to Docker Hub
       env:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_ACCESS_TOKEN }}
       run: docker login -u undeadjava -p $DOCKER_PASSWORD
     - name: Push Image
-      run: docker push undeadjava/server:$(date +%s)
+      run: docker push undeadjava/server
