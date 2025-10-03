@@ -8,11 +8,11 @@ group = 'terarium'
 version = '0.0.1'
 description = 'Back-end server for terarrium'
 
-//java {
-//	toolchain {
-//		languageVersion = JavaLanguageVersion.of(21)
-//	}
-//}
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(25)
+	}
+}
 
 configurations {
 	compileOnly {
@@ -29,7 +29,7 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	
-	implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.8.6'
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.6'
 	
 	runtimeOnly 'org.postgresql:postgresql'
 	implementation 'org.springframework.boot:spring-boot-starter-amqp'

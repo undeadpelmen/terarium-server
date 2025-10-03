@@ -20,18 +20,17 @@ public class OpenApiConfiguration {
     @Bean
     public OpenAPI defineOpenAPI () {
         Server server = new Server();
-        String serverUrl = env.getProperty("server.address");
         String serverPort = env.getProperty("server.port");
-        server.setUrl(serverUrl + ":" + serverPort);
+        server.setUrl(serverPort);
         server.setDescription("Development");
 
         Contact myContact = new Contact();
         myContact.setName("Undead Pelmen");
 
         Info info = new Info()
-                .title("Animals Api for terarium")
-                .version("0.0.1-SNAPSHOT")
-                .description("CRUD Api for work with animals.")
+                .title("Terarium Api for terarium")
+                .version("0.0.1")
+                .description("CRUD Api for work with terariums, users, animals.")
                 .contact(myContact);
         return new OpenAPI().info(info).servers(List.of(server));
     }
