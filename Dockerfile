@@ -1,10 +1,10 @@
-FROM gradle:jdk24-alpine AS builder
+FROM gradle:jdk25-alpine AS builder
 
 WORKDIR /app
 
 COPY . .
 
-RUN chmod +x gradlew && ./gradlew build
+RUN ./gradlew build
 
 
 FROM openjdk:25
