@@ -10,6 +10,9 @@ public class CreateTerariumDto {
     @Schema(example = "My Terarium")
     private String name;
     
+    @Schema(example = "38:d5:7a:f4:fe:41")
+    private String mac;
+    
     @Schema(example = "666")
     private int animalId;
     

@@ -43,13 +43,13 @@ public class TerariumController {
     @Autowired
     private AnimalService animalService;
     
-    @GetMapping("/terarium")
+    @GetMapping("/terariums")
     public List<Terarium> GetAllTerariums() {
         return terariumService.getAllTerariums();
     }
     
-    @GetMapping("/terarium/{terariumId}")
-    @ApiResponses(@ApiResponse(responseCode = "200", useReturnTypeSchema = true, content = @Content(schema = @Schema(implementation = Terarium.class))))
+    @GetMapping("/terariums/{terariumId}")
+    @ApiResponses(@ApiResponse(responseCode = "200",  content = @Content(schema = @Schema(implementation = Terarium.class))))
     @ApiResponse(responseCode = "404", description = "Terarium not found", content = @Content(schema = @Schema(implementation = ErrorDto.class)))
     public ResponseEntity<?> getTerariumById(@PathVariable int terariumId) {
         try {
@@ -65,8 +65,8 @@ public class TerariumController {
         }
     }
     
-    @GetMapping("/terarium/aftor/{aftorId}")
-    @ApiResponses(@ApiResponse(responseCode = "200", useReturnTypeSchema = true, content = @Content(schema = @Schema(implementation = Terarium.class))))
+    @GetMapping("/terariums/aftor/{aftorId}")
+    @ApiResponses(@ApiResponse(responseCode = "200",  content = @Content(schema = @Schema(implementation = Terarium.class))))
     @ApiResponse(responseCode = "404", description = "Terarium not found", content = @Content(schema = @Schema(implementation = ErrorDto.class)))
     public ResponseEntity<?> getTerariumByAftorId(@PathVariable int aftorId) {
         try {
@@ -82,9 +82,26 @@ public class TerariumController {
         }
     }
     
-    @PostMapping("/terarium")
-    @ApiResponses(@ApiResponse(responseCode = "200", useReturnTypeSchema = true, content = @Content(schema = @Schema(implementation = Terarium.class))))
-    @ApiResponse(responseCode = "404", description = "Bad request", content = @Content(schema = @Schema(implementation = ErrorDto.class)))
+    @GetMapping("/terariums/mac/{mac}")
+    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = Terarium.class)))
+    @ApiResponse(responseCode = "404", description = "Terarium not found", content = @Content(schema = @Schema(implementation = ErrorDto.class)))
+    public ResponseEntity<?> getTerariumsByMac(@PathVariable String mac){
+        try {
+            Terarium terarium = terariumService.getTerariumsByMac(mac);
+            
+            return new ResponseEntity<>(terarium, HttpStatus.OK);
+        } catch (Exception e) {
+            log.error("Cant get Terariums by mac");
+            
+            ErrorDto error = new ErrorDto(404, "TERARIUM NOT FOUND", "Can't find terarium with this mac", new Timestamp(System.currentTimeMillis()));
+            
+            return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+        }
+    }
+    
+    @PostMapping("/terariums")
+    @ApiResponses(@ApiResponse(responseCode = "200",  content = @Content(schema = @Schema(implementation = Terarium.class))))
+    @ApiResponse(responseCode = "400", description = "Bad request", content = @Content(schema = @Schema(implementation = ErrorDto.class)))
     public ResponseEntity<?> createTerarium(@RequestBody @Schema(implementation = CreateTerariumDto.class) CreateTerariumDto createTerariumDto) {
         try {
             Animal animal = animalService.getAnimalById(createTerariumDto.getAnimalId());
@@ -103,8 +120,8 @@ public class TerariumController {
         }
     }
     
-    @DeleteMapping("/terarium/{terariumId}")
-    @ApiResponses(@ApiResponse(responseCode = "200", useReturnTypeSchema = true, content = @Content(schema = @Schema(implementation = Terarium.class))))
+    @DeleteMapping("/terariums/{terariumId}")
+    @ApiResponses(@ApiResponse(responseCode = "200",  content = @Content(schema = @Schema(implementation = Terarium.class))))
     @ApiResponse(responseCode = "404", description = "Terarium not found", content = @Content(schema = @Schema(implementation = ErrorDto.class)))
     public ResponseEntity<?> deleTerarium(@PathVariable int terariumId){
         try {
@@ -120,9 +137,9 @@ public class TerariumController {
         }
     }
     
-    @PutMapping("terarium/{terariumId}")
-    @ApiResponses(@ApiResponse(responseCode = "200", useReturnTypeSchema = true, content = @Content(schema = @Schema(implementation = Terarium.class))))
-    @ApiResponse(responseCode = "404", description = "Terarium not found", content = @Content(schema = @Schema(implementation = ErrorDto.class)))
+    @PutMapping("terariums/{terariumId}")
+    @ApiResponses(@ApiResponse(responseCode = "200",  content = @Content(schema = @Schema(implementation = Terarium.class))))
+    @ApiResponse(responseCode = "400", description = "Terarium not found", content = @Content(schema = @Schema(implementation = ErrorDto.class)))
     public ResponseEntity<?> updateTerarium(@PathVariable int terariumId, @RequestBody @Schema(implementation = UpdateTerariumDto.class) UpdateTerariumDto updateTerariumDto) {
         try {
             Animal animal = animalService.getAnimalById(updateTerariumDto.getAnimalId());

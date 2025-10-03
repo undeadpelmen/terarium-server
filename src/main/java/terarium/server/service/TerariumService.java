@@ -31,6 +31,14 @@ public class TerariumService {
         return terariumRepository.findByAftorId(aftorId);
     }
     
+    public Terarium getTerariumsByMac(String mac) throws IOException {
+        Optional<Terarium> terarium = terariumRepository.findByMac(mac);
+        
+        if (!terarium.isPresent()) throw new IOException("Cant get Terarium by mac");
+        
+        return terarium.get();
+    }
+    
     public Terarium createTerarium(Terarium terarium) throws IOException {
         return terariumRepository.save(terarium);
     }

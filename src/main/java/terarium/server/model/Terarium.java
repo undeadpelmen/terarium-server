@@ -8,7 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -29,6 +29,10 @@ public class Terarium {
     @Column(name = "name", nullable = false)
     @Schema(example = "My Terarium")
     private String name;
+    
+    @Column(name = "mac", nullable = false, unique = true)
+    @Schema(example = "38:d5:7a:f4:fe:41")
+    private String mac;
     
     @ManyToOne
     @Schema(contentSchema = Animal.class)

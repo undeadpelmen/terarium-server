@@ -37,13 +37,13 @@ public class UserController {
     @Autowired
     private UserService userService;
     
-    @GetMapping("/user")
+    @GetMapping("/users")
     public List<User> GetAllUsers() {
         return userService.getAllUsers();
     }
     
-    @GetMapping("/user/{userId}")
-    @ApiResponses(@ApiResponse(responseCode = "200", useReturnTypeSchema = true, content = @Content(schema = @Schema(implementation = User.class))))
+    @GetMapping("/users/{userId}")
+    @ApiResponses(@ApiResponse(responseCode = "200",  content = @Content(schema = @Schema(implementation = User.class))))
     @ApiResponse(responseCode = "404", description = "User not found", content = @Content(schema = @Schema(implementation = ErrorDto.class)))
     public ResponseEntity<?> getUserById(@PathVariable int userId) {
         try {
@@ -59,8 +59,8 @@ public class UserController {
         }
     }
     
-    @PostMapping("/user")
-    @ApiResponses(@ApiResponse(responseCode = "200", useReturnTypeSchema = true, content = @Content(schema = @Schema(implementation = User.class))))
+    @PostMapping("/users")
+    @ApiResponses(@ApiResponse(responseCode = "200",  content = @Content(schema = @Schema(implementation = User.class))))
     @ApiResponse(responseCode = "404", description = "Bad request", content = @Content(schema = @Schema(implementation = ErrorDto.class)))
     public ResponseEntity<?> createUser(@RequestBody @Schema(implementation = CreateUserDto.class) CreateUserDto createUserDto) {
         try {
@@ -78,8 +78,8 @@ public class UserController {
         }
     }
     
-    @DeleteMapping("/user/{userId}")
-    @ApiResponses(@ApiResponse(responseCode = "200", useReturnTypeSchema = true, content = @Content(schema = @Schema(implementation = User.class))))
+    @DeleteMapping("/users/{userId}")
+    @ApiResponses(@ApiResponse(responseCode = "200",  content = @Content(schema = @Schema(implementation = User.class))))
     @ApiResponse(responseCode = "404", description = "User not found", content = @Content(schema = @Schema(implementation = ErrorDto.class)))
     public ResponseEntity<?> deleUser(@PathVariable("userId") int userId){
         try {
@@ -95,8 +95,8 @@ public class UserController {
         }
     }
     
-    @PutMapping("user/{userId}")
-    @ApiResponses(@ApiResponse(responseCode = "200", useReturnTypeSchema = true, content = @Content(schema = @Schema(implementation = User.class))))
+    @PutMapping("users/{userId}")
+    @ApiResponses(@ApiResponse(responseCode = "200",  content = @Content(schema = @Schema(implementation = User.class))))
     @ApiResponse(responseCode = "404", description = "User not found", content = @Content(schema = @Schema(implementation = ErrorDto.class)))
     public ResponseEntity<?> updateUser(@PathVariable int userId, @RequestBody @Schema(implementation = UpdateUserDto.class) UpdateUserDto updateUserDto) {
         try {

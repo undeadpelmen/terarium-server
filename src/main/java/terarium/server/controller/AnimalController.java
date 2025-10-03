@@ -37,13 +37,13 @@ public class AnimalController {
     @Autowired
     private AnimalService animalService;
     
-    @GetMapping("/animal")
+    @GetMapping("/animals")
     public List<Animal> GetAllAnimals() {
         return animalService.getAllAnimals();
     }
     
-    @GetMapping("/animal/{animalId}")
-    @ApiResponses(@ApiResponse(responseCode = "200", useReturnTypeSchema = true, content = @Content(schema = @Schema(implementation = Animal.class))))
+    @GetMapping("/animals/{animalId}")
+    @ApiResponses(@ApiResponse(responseCode = "200",  content = @Content(schema = @Schema(implementation = Animal.class))))
     @ApiResponse(responseCode = "404", description = "Animal not found", content = @Content(schema = @Schema(implementation = ErrorDto.class)))
     public ResponseEntity<?> getAnimalById(@PathVariable int animalId) {
         try {
@@ -59,8 +59,8 @@ public class AnimalController {
         }
     }
     
-    @PostMapping("/animal")
-    @ApiResponses(@ApiResponse(responseCode = "200", useReturnTypeSchema = true, content = @Content(schema = @Schema(implementation = Animal.class))))
+    @PostMapping("/animals")
+    @ApiResponses(@ApiResponse(responseCode = "200",  content = @Content(schema = @Schema(implementation = Animal.class))))
     @ApiResponse(responseCode = "404", description = "Bad request", content = @Content(schema = @Schema(implementation = ErrorDto.class)))
     public ResponseEntity<?> createAnimal(@RequestBody @Schema(implementation = CreateAnimalDto.class) CreateAnimalDto createAnimalDto) {
         try {
@@ -78,8 +78,8 @@ public class AnimalController {
         }
     }
     
-    @DeleteMapping("/animal/{animalId}")
-    @ApiResponses(@ApiResponse(responseCode = "200", useReturnTypeSchema = true, content = @Content(schema = @Schema(implementation = Animal.class))))
+    @DeleteMapping("/animals/{animalId}")
+    @ApiResponses(@ApiResponse(responseCode = "200",  content = @Content(schema = @Schema(implementation = Animal.class))))
     @ApiResponse(responseCode = "404", description = "Animal not found", content = @Content(schema = @Schema(implementation = ErrorDto.class)))
     public ResponseEntity<?> deleAnimal(@PathVariable("animalId") int animalId){
         try {
@@ -95,8 +95,8 @@ public class AnimalController {
         }
     }
     
-    @PutMapping("animal/{animalId}")
-    @ApiResponses(@ApiResponse(responseCode = "200", useReturnTypeSchema = true, content = @Content(schema = @Schema(implementation = Animal.class))))
+    @PutMapping("animals/{animalId}")
+    @ApiResponses(@ApiResponse(responseCode = "200",  content = @Content(schema = @Schema(implementation = Animal.class))))
     @ApiResponse(responseCode = "404", description = "Animal not found", content = @Content(schema = @Schema(implementation = ErrorDto.class)))
     public ResponseEntity<?> updateAnimal(@PathVariable int animalId, @RequestBody @Schema(implementation = UpdateAnimalDto.class) UpdateAnimalDto updateAnimalDto) {
         try {
