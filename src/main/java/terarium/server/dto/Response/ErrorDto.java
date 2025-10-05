@@ -1,4 +1,4 @@
-package terarium.server.dto.Error;
+package terarium.server.dto.Response;
 
 import java.sql.Timestamp;
 

@@ -8,7 +8,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -47,6 +46,7 @@ public class Terarium {
         
         terarium.setAftorId(createTerariumDto.getAftorId());
         terarium.setName(createTerariumDto.getName());
+        terarium.setMac(createTerariumDto.getMac());
         terarium.setAnimal(animal);
         
         return terarium;
@@ -57,6 +57,7 @@ public class Terarium {
         
         terarium.setAftorId(updateTerariumDto.getAftorId());
         terarium.setName(updateTerariumDto.getName());
+        terarium.setMac(updateTerariumDto.getMac());
         terarium.setAnimal(animal);
         
         return terarium;

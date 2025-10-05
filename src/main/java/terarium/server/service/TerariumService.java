@@ -39,7 +39,7 @@ public class TerariumService {
         return terarium.get();
     }
     
-    public Terarium createTerarium(Terarium terarium) throws IOException {
+    public Terarium createTerarium(Terarium terarium) throws Exception {
         return terariumRepository.save(terarium);
     }
     
