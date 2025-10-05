@@ -1,6 +1,5 @@
 package terarium.server.controller;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -27,7 +26,6 @@ import terarium.server.service.AnimalService;
 import terarium.server.service.TerariumService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -114,14 +112,5 @@ public class TerariumController {
         terarium = terariumService.updateTerarium(terarium, terariumId);
         
         return new ResponseTerariumDto(terarium, HttpStatus.OK);
-    }
-    
-    @ExceptionHandler(Exception.class)
-    public ErrorDto ExceptionHandler(Exception e) {
-        log.error(e.getClass().getSimpleName(), e.getMessage());
-        
-        log.debug("error", e);
-        
-        return new ErrorDto(400, "error", "Something went wrong", new Timestamp(System.currentTimeMillis()));
     }
 }
