@@ -1,7 +1,5 @@
 package terarium.server.controller;
 
-import java.sql.Timestamp;
-
 import org.slf4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -16,10 +14,10 @@ public class ExceptionControllerAdvice {
     private Logger log = ServerApplication.log;
     
     @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
     public ErrorDto ExceptionHandler(Exception e) {
-        log.error("Some Error", e);
+        log.error("Unhandled Exception", e);
         
-        return new ErrorDto(HttpStatus.BAD_REQUEST, "Something wen wrong", new Timestamp(System.currentTimeMillis()));
+        return new ErrorDto("Something went wrong");
     }
 }

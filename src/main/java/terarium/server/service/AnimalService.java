@@ -7,6 +7,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import terarium.server.error.EntityCreateException;
+import terarium.server.error.EntityDeleteException;
+import terarium.server.error.EntityGetException;
+import terarium.server.error.EntityUpdateException;
 import terarium.server.model.Animal;
 import terarium.server.repository.AnimalRepository;
 
@@ -15,33 +19,45 @@ public class AnimalService {
     @Autowired
     private AnimalRepository animalRepository;
     
-    public List<Animal> getAllAnimals(){
-        return animalRepository.findAll();
+    public List<Animal> getAllAnimals() throws IOException {
+        try {
+            return animalRepository.findAll();
+        } catch(Exception e) {
+            throw new EntityGetException();
+        }
     }
     
     public Animal getAnimalById(int id) throws IOException {
         Optional<Animal> animal = animalRepository.findById(id);
         
-        if (!animal.isPresent()) throw new IOException();
+        if (!animal.isPresent()) throw new EntityGetException("animal get exception");
         
         return animal.get();
     }
     
     public Animal createAnimal(Animal animal) throws IOException {
-        return animalRepository.save(animal);
+        try{
+            return animalRepository.save(animal);
+        } catch(Exception e) {
+            throw new EntityCreateException();
+        }
     }
     
     public void deleteAnimal(int id) throws IOException {
         Optional<Animal> animal = animalRepository.findById(id);
         
-        if (!animal.isPresent()) throw new IOException();
+        if (!animal.isPresent()) throw new EntityDeleteException();
         
         animalRepository.deleteById(id);
     }
     
-    public Animal updateAnimal(Animal animal, int id){
+    public Animal updateAnimal(Animal animal, int id) throws IOException {
         animal.setId(id);
         
-        return animalRepository.save(animal);
+        try{
+            return animalRepository.save(animal);
+        } catch (Exception e) {
+            throw new EntityUpdateException();
+        }
     }
 }
