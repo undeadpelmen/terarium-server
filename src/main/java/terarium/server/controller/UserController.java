@@ -1,5 +1,7 @@
 package terarium.server.controller;
 
+import java.io.IOException;
+
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,7 +44,7 @@ public class UserController {
     
     @GetMapping("/users")
     @ApiResponse(responseCode = "200", useReturnTypeSchema = true)
-    public ListResponseDto GetAllUsers() {
+    public ListResponseDto GetAllUsers() throws IOException {
         return new ListResponseDto(userService.getAllUsers());
     }
     

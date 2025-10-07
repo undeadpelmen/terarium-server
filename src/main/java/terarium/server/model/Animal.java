@@ -26,7 +26,7 @@ public class Animal {
     private int id;
     
     @Column(name = "name",nullable = false,unique = true)
-    @Schema(example = "Crested gecko")
+    @Schema(example = "Реснитчачый ")
     private String name;
     
     @Column(name = "lat_name",nullable = false,unique = true)
@@ -53,9 +53,13 @@ public class Animal {
     @Schema(example = "11.0")
     private float uv_time;
     
-    @Column(name = "uv_req",nullable = false)
-    @Schema(example = "5.0,13W")
-    private String uv_req;
+    @Column(name = "uv_spec",nullable = false)
+    @Schema(example = "10.0")
+    private float uv_spec;
+    
+    @Column(name = "uv_power", nullable = false)
+    @Schema(example = "10")
+    private int uv_power;
     
     @Column(name = "humidity_max",nullable = false)
     @Schema(example = "80")
@@ -97,7 +101,8 @@ public class Animal {
         animal.setNight_min_t(AnimalDto.getNight_min_t());
         animal.setHumidity_max(AnimalDto.getHumidity_max());
         animal.setHumidity_min(AnimalDto.getHumidity_min());
-        animal.setUv_req(AnimalDto.getUv_req());
+        animal.setUv_spec(AnimalDto.getUv_spec());
+        animal.setUv_power(AnimalDto.getUv_power());
         animal.setFeed_rate(AnimalDto.getFeed_rate());
         animal.setFood(AnimalDto.getFood());
         animal.setKide_feed_rate(AnimalDto.getKide_feed_rate());
@@ -119,7 +124,8 @@ public class Animal {
         animal.setNight_min_t(AnimalDto.getNight_min_t());
         animal.setHumidity_max(AnimalDto.getHumidity_max());
         animal.setHumidity_min(AnimalDto.getHumidity_min());
-        animal.setUv_req(AnimalDto.getUv_req());
+        animal.setUv_spec(AnimalDto.getUv_spec());
+        animal.setUv_power(AnimalDto.getUv_power());
         animal.setFeed_rate(AnimalDto.getFeed_rate());
         animal.setFood(AnimalDto.getFood());
         animal.setKide_feed_rate(AnimalDto.getKide_feed_rate());

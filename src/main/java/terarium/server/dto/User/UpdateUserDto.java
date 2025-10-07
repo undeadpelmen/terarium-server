@@ -11,5 +11,5 @@ public class UpdateUserDto {
     private String email;
     
     @Schema(example = "someverystrongpasswordhash")
-    private String password;
+    private String passwordHash;
 }

@@ -29,8 +29,11 @@ public class UpdateAnimalDto {
     @Schema(example = "11.0")
     private float uv_time;
     
-    @Schema(example = "5.0,13W")
-    private String uv_req;
+    @Schema(example = "5.0")
+    private float uv_spec;
+    
+    @Schema(example = "13")
+    private int uv_power;
     
     @Schema(example = "80")
     private int humidity_max;

@@ -43,7 +43,7 @@ public class User {
         User user = new User();
         
         user.setEmail(updateUserDto.getEmail());
-        user.setPasswordHash(updateUserDto.getPassword());
+        user.setPasswordHash(updateUserDto.getPasswordHash());
         
         return user;
     }
