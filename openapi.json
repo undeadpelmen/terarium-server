@@ -1,0 +1,1495 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "Terarium Api for terarium",
+        "description": "CRUD Api for work with terariums, users, animals.",
+        "contact": {
+            "name": "Undead Pelmen"
+        },
+        "version": "0.0.1"
+    },
+    "servers": [
+        {
+            "url": "65535",
+            "description": "Development"
+        }
+    ],
+    "paths": {
+        "/users/{userId}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "operationId": "getUserById",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseUserDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    },
+                    "418": {
+                        "description": "I'm a teapot",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "operationId": "updateUser",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateUserDto"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseUserDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    },
+                    "418": {
+                        "description": "I'm a teapot",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "User"
+                ],
+                "operationId": "deleUser",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OkResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    },
+                    "418": {
+                        "description": "I'm a teapot",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/terariums/{terariumId}": {
+            "get": {
+                "tags": [
+                    "Terarium"
+                ],
+                "operationId": "getTerariumById",
+                "parameters": [
+                    {
+                        "name": "terariumId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseTerariumDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    },
+                    "418": {
+                        "description": "I'm a teapot",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Terarium"
+                ],
+                "operationId": "updateTerarium",
+                "parameters": [
+                    {
+                        "name": "terariumId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateTerariumDto"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseTerariumDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    },
+                    "418": {
+                        "description": "I'm a teapot",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Terarium"
+                ],
+                "operationId": "deleTerarium",
+                "parameters": [
+                    {
+                        "name": "terariumId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OkResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    },
+                    "418": {
+                        "description": "I'm a teapot",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/animals/{animalId}": {
+            "get": {
+                "tags": [
+                    "Animal"
+                ],
+                "operationId": "getAnimalById",
+                "parameters": [
+                    {
+                        "name": "animalId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseAnimalDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    },
+                    "418": {
+                        "description": "I'm a teapot",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Animal"
+                ],
+                "operationId": "updateAnimal",
+                "parameters": [
+                    {
+                        "name": "animalId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Update Animal Dto"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseAnimalDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    },
+                    "418": {
+                        "description": "I'm a teapot",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Animal"
+                ],
+                "operationId": "deleAnimal",
+                "parameters": [
+                    {
+                        "name": "animalId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OkResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    },
+                    "418": {
+                        "description": "I'm a teapot",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "operationId": "GetAllUsers",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ListResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    },
+                    "418": {
+                        "description": "I'm a teapot",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "operationId": "createUser",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateUserDto"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseUserDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    },
+                    "418": {
+                        "description": "I'm a teapot",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/terariums": {
+            "get": {
+                "tags": [
+                    "Terarium"
+                ],
+                "operationId": "GetAllTerariums",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ListResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    },
+                    "418": {
+                        "description": "I'm a teapot",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Terarium"
+                ],
+                "operationId": "createTerarium",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateTerariumDto"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseTerariumDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    },
+                    "418": {
+                        "description": "I'm a teapot",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/animals": {
+            "get": {
+                "tags": [
+                    "Animal"
+                ],
+                "operationId": "GetAllAnimals",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ListResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    },
+                    "418": {
+                        "description": "I'm a teapot",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Animal"
+                ],
+                "operationId": "createAnimal",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Create Animal Dto"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseAnimalDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    },
+                    "418": {
+                        "description": "I'm a teapot",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/terariums/mac/{mac}": {
+            "get": {
+                "tags": [
+                    "Terarium"
+                ],
+                "operationId": "getTerariumsByMac",
+                "parameters": [
+                    {
+                        "name": "mac",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseTerariumDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    },
+                    "418": {
+                        "description": "I'm a teapot",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/terariums/aftor/{aftorId}": {
+            "get": {
+                "tags": [
+                    "Terarium"
+                ],
+                "operationId": "getTerariumByAftorId",
+                "parameters": [
+                    {
+                        "name": "aftorId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ListResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    },
+                    "418": {
+                        "description": "I'm a teapot",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/termac": {
+            "get": {
+                "tags": [
+                    "Admin Panel"
+                ],
+                "operationId": "getTerariumsMac",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "418": {
+                        "description": "I'm a teapot",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDto"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ErrorDto": {
+                "type": "object",
+                "description": "Error Dto",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "Something went wrong"
+                    },
+                    "timestamp": {
+                        "type": "string",
+                        "example": "02-01-2006 15:04"
+                    }
+                }
+            },
+            "UpdateUserDto": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "example": "example@example.com"
+                    },
+                    "passwordHash": {
+                        "type": "string",
+                        "example": "someverystrongpasswordhash"
+                    }
+                }
+            },
+            "ResponseUserDto": {
+                "type": "object",
+                "properties": {
+                    "user": {
+                        "$ref": "#/components/schemas/User"
+                    }
+                }
+            },
+            "User": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 666
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "example@example.com"
+                    },
+                    "passwordHash": {
+                        "type": "string",
+                        "example": "someverystrongpasswordhash"
+                    }
+                }
+            },
+            "UpdateTerariumDto": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "My Terarium"
+                    },
+                    "mac": {
+                        "type": "string",
+                        "example": "38:d5:7a:f4:fe:41"
+                    },
+                    "animalId": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 666
+                    },
+                    "aftorId": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 666
+                    }
+                }
+            },
+            "Animal": {
+                "type": "object",
+                "description": "Animal",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 666
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Реснитчачый "
+                    },
+                    "lat_name": {
+                        "type": "string",
+                        "example": "Correloporhus ciliatus"
+                    },
+                    "day_max_t": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 28
+                    },
+                    "day_min_t": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 26
+                    },
+                    "night_max_t": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 24
+                    },
+                    "night_min_t": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 22
+                    },
+                    "uv_time": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 11.0
+                    },
+                    "uv_spec": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 10.0
+                    },
+                    "uv_power": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 10
+                    },
+                    "humidity_max": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 80
+                    },
+                    "humidity_min": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 60
+                    },
+                    "day_len": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 11.0
+                    },
+                    "feed_rate": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 2.0
+                    },
+                    "kide_feed_rate": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 1.0
+                    },
+                    "food": {
+                        "type": "string",
+                        "example": "Cricket, zophobas, mealworm, hawk moth caterpillar, sugar-free tropical fruit puree"
+                    },
+                    "vitamins": {
+                        "type": "string",
+                        "example": "Calcium, D3, multivitamins"
+                    }
+                }
+            },
+            "ResponseTerariumDto": {
+                "type": "object",
+                "properties": {
+                    "terarium": {
+                        "$ref": "#/components/schemas/Terarium"
+                    }
+                }
+            },
+            "Terarium": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 666
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "My Terarium"
+                    },
+                    "mac": {
+                        "type": "string",
+                        "example": "38:d5:7a:f4:fe:41"
+                    },
+                    "animal": {
+                        "$ref": "#/components/schemas/Animal",
+                        "contentSchema": {
+                            "$ref": "#/components/schemas/Animal"
+                        }
+                    },
+                    "aftorId": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 666
+                    }
+                }
+            },
+            "Update Animal Dto": {
+                "type": "object",
+                "description": "Dto for update(PUT) request",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Crested gecko"
+                    },
+                    "lat_name": {
+                        "type": "string",
+                        "example": "Correloporhus ciliatus"
+                    },
+                    "day_max_t": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 28
+                    },
+                    "day_min_t": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 26
+                    },
+                    "night_max_t": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 24
+                    },
+                    "night_min_t": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 22
+                    },
+                    "uv_time": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 11.0
+                    },
+                    "uv_spec": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 5.0
+                    },
+                    "uv_power": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 13
+                    },
+                    "humidity_max": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 80
+                    },
+                    "humidity_min": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 60
+                    },
+                    "day_len": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 11.0
+                    },
+                    "feed_rate": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 5.5
+                    },
+                    "kide_feed_rate": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 2.0
+                    },
+                    "food": {
+                        "type": "string",
+                        "example": "Cricket, zophobas, mealworm, hawk moth caterpillar, sugar-free tropical fruit puree"
+                    },
+                    "vitamins": {
+                        "type": "string",
+                        "example": "Calcium, D3, multivitamins"
+                    }
+                }
+            },
+            "ResponseAnimalDto": {
+                "type": "object",
+                "properties": {
+                    "animal": {
+                        "$ref": "#/components/schemas/Animal"
+                    }
+                }
+            },
+            "CreateUserDto": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "example": "example@example.com"
+                    },
+                    "passwordHash": {
+                        "type": "string",
+                        "example": "someverystrongpasswordhash"
+                    }
+                }
+            },
+            "CreateTerariumDto": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "My Terarium"
+                    },
+                    "mac": {
+                        "type": "string",
+                        "example": "38:d5:7a:f4:fe:41"
+                    },
+                    "animalId": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 666
+                    },
+                    "aftorId": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 666
+                    }
+                }
+            },
+            "Create Animal Dto": {
+                "type": "object",
+                "description": "Dto for create(POST) request",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Crested gecko"
+                    },
+                    "lat_name": {
+                        "type": "string",
+                        "example": "Correloporhus ciliatus"
+                    },
+                    "day_max_t": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 28
+                    },
+                    "day_min_t": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 26
+                    },
+                    "night_max_t": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 24
+                    },
+                    "night_min_t": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 22
+                    },
+                    "uv_time": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 11.0
+                    },
+                    "uv_spec": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 5.0
+                    },
+                    "uv_power": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 13
+                    },
+                    "humidity_max": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 80
+                    },
+                    "humidity_min": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 60
+                    },
+                    "day_len": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 11.0
+                    },
+                    "feed_rate": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 5.5
+                    },
+                    "kide_feed_rate": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 2.0
+                    },
+                    "food": {
+                        "type": "string",
+                        "example": "Cricket, zophobas, mealworm, hawk moth caterpillar, sugar-free tropical fruit puree"
+                    },
+                    "vitamins": {
+                        "type": "string",
+                        "example": "Calcium, D3, multivitamins"
+                    }
+                }
+            },
+            "ListResponseDto": {
+                "type": "object",
+                "properties": {
+                    "list": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "OkResponseDto": {
+                "type": "object",
+                "properties": {
+                    "messege": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}
