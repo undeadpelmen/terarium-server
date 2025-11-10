@@ -7,7 +7,7 @@ COPY . .
 RUN ./gradlew build
 
 
-FROM openjdk:26
+FROM openjdk:26-ea-trixie
 
 WORKDIR /app
 
