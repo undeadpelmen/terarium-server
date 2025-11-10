@@ -7,7 +7,7 @@ COPY . .
 RUN ./gradlew build
 
 
-FROM openjdk:25
+FROM openjdk:26
 
 WORKDIR /app
 
