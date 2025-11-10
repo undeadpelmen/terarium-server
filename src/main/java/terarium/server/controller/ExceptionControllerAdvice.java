@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import terarium.server.ServerApplication;
-import terarium.server.dto.Response.ErrorDto;
+import terarium.server.model.dto.Response.ErrorDto;
 
 @RestControllerAdvice
 public class ExceptionControllerAdvice {

@@ -1,4 +1,4 @@
-package terarium.server.dto.Rabbit;
+package terarium.server.model.dto.Rabbit;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

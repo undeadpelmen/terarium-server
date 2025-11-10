@@ -18,9 +18,9 @@ import org.springframework.context.annotation.Configuration;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import terarium.server.dto.Rabbit.InitMessage;
-import terarium.server.dto.Terarium.TerariumRabbitDto;
 import terarium.server.model.Terarium;
+import terarium.server.model.dto.Rabbit.InitMessage;
+import terarium.server.model.dto.Terarium.TerariumRabbitInDto;
 import terarium.server.service.TerariumAmqpService;
 import terarium.server.service.TerariumService;
 
@@ -55,31 +55,29 @@ public class RabbitInitConfiguration {
         
         InitMessage mes = mapper.readValue(message, InitMessage.class);
         
+        String consumeQueueName = "terarium.out/" + mes.getMac();
+        String produceQueueName = "terarium.in/" + mes.getMac();
+        
         if (!ter.containsKey(mes.getMac())){
             log.info("\n new terarium \n mac: {}", mes.getMac());
             
             ter.put(mes.getMac(), mes.getTime());
             
-            String consumeQueueName = "terarium.out/" + mes.getMac();
-            String produceQueueName = "terarium.in/" + mes.getMac();
-            
-            terariumAmqpService.newQueue(consumeQueueName);
-            
-            terariumAmqpService.newQueueListner(consumeQueueName);
+            terariumAmqpService.newListeneableQueue(consumeQueueName);
             
             terariumAmqpService.newQueue(produceQueueName);
+        }
+        
+        try {
+            Terarium terarium = terariumService.getTerariumsByMac(mes.getMac());
             
-            try {
-                Terarium terarium = terariumService.getTerariumsByMac(mes.getMac());
-                
-                rabbitTemplate.convertAndSend(produceQueueName, mapper.writeValueAsString(terarium));
-            } catch (IOException e) {
-                log.warn("Unregistred terarium");
-                
-                TerariumRabbitDto terariumRabbitDto = new TerariumRabbitDto(mes.getMac(), "Terarium unregistred", new SimpleDateFormat("dd-MM-yy HH:mm").format( new Timestamp(System.currentTimeMillis())));
-                
-                rabbitTemplate.convertAndSend(produceQueueName, mapper.writeValueAsString(terariumRabbitDto));
-            }
+            rabbitTemplate.convertAndSend(produceQueueName, mapper.writeValueAsString(terarium));
+        } catch (IOException e) {
+            log.warn("Unregistred terarium\n {}", e.getMessage());
+            
+            TerariumRabbitInDto terariumRabbitDto = new TerariumRabbitInDto(mes.getMac(), "Terarium unregistred", new SimpleDateFormat("dd-MM-yy HH:mm").format( new Timestamp(System.currentTimeMillis())));
+            
+            rabbitTemplate.convertAndSend(produceQueueName, mapper.writeValueAsString(terariumRabbitDto));
         }
 	}
     

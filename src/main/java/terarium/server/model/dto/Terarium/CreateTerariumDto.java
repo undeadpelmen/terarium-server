@@ -1,4 +1,4 @@
-package terarium.server.dto.Terarium;
+package terarium.server.model.dto.Terarium;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

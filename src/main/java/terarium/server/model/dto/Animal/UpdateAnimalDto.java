@@ -1,4 +1,4 @@
-package terarium.server.dto.Animal;
+package terarium.server.model.dto.Animal;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -6,8 +6,8 @@ import lombok.Data;
 
 @Data
 @Tag(name = "Animal")
-@Schema(name = "Create Animal Dto", description = "Dto for create(POST) request")
-public class CreateAnimalDto {
+@Schema(name = "Update Animal Dto", description = "Dto for update(PUT) request")
+public class UpdateAnimalDto {
     @Schema(example = "Crested gecko")
     private String name;
     

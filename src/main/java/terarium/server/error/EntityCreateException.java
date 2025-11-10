@@ -9,4 +9,8 @@ public class EntityCreateException extends IOException {
     public EntityCreateException(String messege) {
         super(messege);
     }
+    
+    public EntityCreateException(String message, Throwable tr) {
+        super(message, tr);
+    }
 }

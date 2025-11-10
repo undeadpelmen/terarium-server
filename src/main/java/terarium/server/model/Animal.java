@@ -10,8 +10,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import terarium.server.dto.Animal.CreateAnimalDto;
-import terarium.server.dto.Animal.UpdateAnimalDto;
+import terarium.server.model.dto.Animal.CreateAnimalDto;
+import terarium.server.model.dto.Animal.UpdateAnimalDto;
 
 @Entity
 @Table(name="animal")

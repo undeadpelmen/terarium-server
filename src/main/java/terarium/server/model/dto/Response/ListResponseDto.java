@@ -1,4 +1,4 @@
-package terarium.server.dto.Response;
+package terarium.server.model.dto.Response;
 
 import java.util.List;
 

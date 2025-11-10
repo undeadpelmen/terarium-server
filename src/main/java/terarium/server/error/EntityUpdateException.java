@@ -9,4 +9,8 @@ public class EntityUpdateException extends IOException {
     public EntityUpdateException (String messege) {
         super(messege);
     }
+    
+    public EntityUpdateException (String message, Throwable tr) {
+        super(message, tr);
+    }
 }

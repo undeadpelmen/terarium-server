@@ -1,4 +1,4 @@
-package terarium.server.dto.Animal;
+package terarium.server.model.dto.Animal;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

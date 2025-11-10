@@ -28,12 +28,16 @@ public class TerariumAmqpService {
         amqpAdmin.declareQueue(new Queue(queueName, true, false, true));
     }
     
-    public void newQueueListner(String queueName) {
+    public void newListeneableQueue(String queueName) {
+        String empointId = queueName + "-listener";
+        
+        amqpAdmin.declareQueue(new Queue(queueName, true, false, true));
+        
         log.info("Declared new queue: " + queueName);
         
         SimpleRabbitListenerEndpoint endpoint = new SimpleRabbitListenerEndpoint();
         
-        endpoint.setId(queueName + "-listener");
+        endpoint.setId(empointId);
         
         endpoint.setQueueNames(queueName);
         

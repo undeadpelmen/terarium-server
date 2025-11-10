@@ -9,8 +9,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import terarium.server.dto.User.CreateUserDto;
-import terarium.server.dto.User.UpdateUserDto;
+import terarium.server.model.dto.User.CreateUserDto;
+import terarium.server.model.dto.User.UpdateUserDto;
 
 @Entity
 @Table(name = "terarium_users")

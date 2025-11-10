@@ -10,9 +10,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import terarium.server.dto.Terarium.CreateTerariumDto;
-import terarium.server.dto.Terarium.UpdateTerariumDto;
+import terarium.server.model.dto.Terarium.CreateTerariumDto;
+import terarium.server.model.dto.Terarium.UpdateTerariumDto;
 
 
 @Entity
