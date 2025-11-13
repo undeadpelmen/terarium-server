@@ -1,4 +1,4 @@
-# Rabbit Back-end Server
+# Terarium Back-end Server
 
 ## Installation
 
@@ -8,29 +8,14 @@ git clone https://github.com/undeadpelmen/terarium-server.git
 cd terarium-server
 ```
 
-### What you need to do before you start
+### Before you run the server, you need to configure the database and message broker
 
-1. Install docker
+You can start the database and message broker locally,
+ with docker or use [ready docker-compose repository](https://github.com/undeadpelmen/terarum)
 
-2. Setup the PostgreSQL
+### Setup environment variables
 
 ``` sh
-docker pull postgres:16
-
-docker run -d --name postgres -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=terarium postgres:16
-```
-
-3. Install RabbitMQ
-
-```sh
-docker pull rabbitmq:4.0-management
-
-docker run -d --name rabbitmq -p 15672:15672 -p 5672:5672 rabbitmq:4.0-management
-```
-
-4. Setup env variables
-
-```sh
 echo "
 export SERVER_PORT=65535
 export SPRING_DATASOURCE_USERNAME=postgres
@@ -42,7 +27,7 @@ export SPRING_RABBITMQ_USERNAME=guest
 export SPRING_RABBITMQ_PASSWORD=guest" >> ~/.bashrc
 ```
 
-### Now you can run the server
+### Run the server
 
 ``` sh
 ./gradlew build

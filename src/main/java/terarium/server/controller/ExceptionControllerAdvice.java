@@ -18,6 +18,6 @@ public class ExceptionControllerAdvice {
     public ErrorDto ExceptionHandler(Exception e) {
         log.error("Unhandled Exception", e);
         
-        return new ErrorDto("Something went wrong");
+        return new ErrorDto("Something went wrong", e);
     }
 }
