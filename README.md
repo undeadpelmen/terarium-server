@@ -37,6 +37,6 @@ java -jar ./build/libs/server-0.0.1.jar
 
 ## API
 
-Swagger UI: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+Swagger UI: [http://localhost:65535/swagger-ui/index.html](http://localhost:65535/swagger-ui/index.html)
 
-OpenAPI Json: [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
+OpenAPI Json: [http://localhost:65535/v3/api-docs](http://localhost:65535/v3/api-docs)

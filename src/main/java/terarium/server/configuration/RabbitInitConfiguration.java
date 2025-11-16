@@ -45,7 +45,7 @@ public class RabbitInitConfiguration {
     private Map<String, String> ter = new HashMap<String, String>();
     
 	@Bean
-	public Queue myQueue() {
+	public Queue InitQueue() {
 		return new Queue(INIT_QUEUE, true, false, true);
 	}
     
